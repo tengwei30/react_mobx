@@ -5,6 +5,7 @@ import { renderRoutes } from 'react-router-config'
 import LayoutPage from './LayoutPages/index.jsx'
 import routes from '../routes/index.js'
 import stores from '../stores/index'
+import * as mobx from 'mobx';
 
 const App = () => (
     <Provider {...stores()}>
@@ -12,6 +13,5 @@ const App = () => (
             {renderRoutes(routes)}
         </Router> 
     </Provider>
-    
   )
 export default App

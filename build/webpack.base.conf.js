@@ -15,7 +15,7 @@ module.exports = {
     },
     output: {
         path: config.build.assetsRoot,
-        filename: '[name].[chunkhash:8].bundle.js',
+        filename: '[name].[hash].bundle.js',
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
