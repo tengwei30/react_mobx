@@ -4,6 +4,7 @@ import Schedule from '../pages/Schedule/index.jsx';
 import Roster from '../pages/Roster/index.jsx';
 import LayoutPage from '../pages/LayoutPages/index.jsx';
 import Login from '../pages/Login/index.jsx';
+import Meet from '../pages/Meet/meet.jsx';
 
 const createRoutes = [{
     path:'/login',
@@ -21,6 +22,9 @@ const createRoutes = [{
         },{
             path: '/schedule',
             component: Schedule
+        },{
+            path: '/meet/:id',
+            component: Meet
         }
     ]
 }]

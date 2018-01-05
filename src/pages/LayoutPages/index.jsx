@@ -11,7 +11,6 @@ const imgs = {
     logoSmall: require('../../../assets/images/logoSmall.png'),
     avatar: require('../../../assets/images/avatar.png')
 }
-
 @inject('layoutStore')
 @observer
 class LayoutaPage extends React.Component {
@@ -20,16 +19,17 @@ class LayoutaPage extends React.Component {
             this.props.layoutStore.fetchData()
         })
     }
-    // componentWillReact() {
-    //     this.props.layoutStore.fetchData()
-    // }
     SelectChange = (value) => {
-        console.info(value)
+        this.props.layoutStore.setselectKey(value)
+        sessionStorage.setItem('selectKey', value)
     }
     Click = ({key}) => {
-        this.props.history.push({pathname: key})
+        const { layoutStore, history } = this.props
+        layoutStore.setRoomId(key)
+        history.push({pathname: `/meet/${key}`})
     }
     render() {
+        const { listdatas, roomInfo } = this.props.layoutStore
         return (
             <Layout>
                 <Sider style={{background:'#fff'}}>
@@ -46,32 +46,37 @@ class LayoutaPage extends React.Component {
                     <Select
                         showSearch
                         style={{width: 160,marginLeft: 15,marginBottom: 15}}
-                        defaultValue='会议室'
+                        defaultValue={sessionStorage.getItem('selectKey') || '会议室'}
                         onChange={this.SelectChange}
                     >
-                        <Option value="meeting">会议室</Option>
-                        <Option value="face">面试室</Option>
-                        <Option value="voice">录音室</Option>
+                        <Select.Option value="meeting">会议室</Select.Option>
+                        <Select.Option value="face">面试室</Select.Option>
+                        <Select.Option value="voice">录音室</Select.Option>
                     </Select>
-                    <Menu mode="inline" defaultSelectedKeys={['1']} onClick={this.Click}>
-                        <Menu.Item key="home">
-                            <Icon type="user" />
-                            Home
-                        </Menu.Item>
-                        <Menu.Item key="roster">
-                            <Icon type="video-camera" />
-                            Roster
-                        </Menu.Item>
-                        <Menu.Item key="schedule">
-                            <Icon type="upload" />
-                            Schedule
-                        </Menu.Item>
+                    <Menu mode="inline" onClick={this.Click}>
+                        {
+                           listdatas.map(item => {
+                                if(roomInfo.id == item.id) {
+                                    return(
+                                        <Menu.Item key={item.id} className="trigger Layoutactive">
+                                            <span>{ item.name }</span>
+                                        </Menu.Item> 
+                                    )
+                                }else {
+                                    return(
+                                        <Menu.Item key={ item.id } className="trigger">
+                                            <span>{ item.name }</span>
+                                        </Menu.Item> 
+                                    )  
+                                }
+                           }) 
+                        }
                     </Menu>
                 </Sider>
                 <Layout>
                 <Header style={{ background: '#fff', padding: 0 }}>
                 </Header>
-                <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+                <Content style={{ margin: '24px 16px', padding: 24, background: 'rgb(245,245,245)', minHeight: 280 }}>
                      {renderRoutes(this.props.route.routes)}
                 </Content>
                 </Layout>
@@ -80,13 +85,5 @@ class LayoutaPage extends React.Component {
     }
 }
 
-const MenuList = (menulists) => {
-    return (
-        menulists.map(item => {
-            console.log(item)
-        })
-    )
-    
-}
 
 export default LayoutaPage
