@@ -54,6 +54,11 @@ class LayoutStore {
     setRoomId (num) { // 房间号
         this.roomId = num
     }
+    
+    @computed
+    get RoomId () {
+        return this.roomId
+    }
 
 }
 
