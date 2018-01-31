@@ -26,7 +26,6 @@ class CommentStore {
                 const num = window.location.href.lastIndexOf('/') + 1
                 if(res.data.roomId && res.data.roomId == url.slice(num)) {
                     this.responseData = res.data.data
-                    console.log(this.responseData)
                 }
             })
         } else {
