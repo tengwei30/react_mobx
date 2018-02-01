@@ -32,7 +32,7 @@ class LayoutaPage extends React.Component {
         const { listdatas, roomInfo } = this.props.layoutStore
         return (
             <Layout>
-                <Sider style={{background:'#fff'}}>
+                <Sider style={{background:'#fff',height:'100%',overflow:'scroll hidden'}}>
                     <div className="logo" >
                         <img src={imgs.logoSmall} className="logo_small"/>
                         <header>

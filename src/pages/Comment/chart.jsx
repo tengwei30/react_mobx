@@ -18,6 +18,9 @@ export default class Chart extends React.Component {
             this.props.commentStore.fetchData(RoomId)
         })
     }
+    showModel = () => {
+        console.log(1)
+    }
     render() {
         const {commentStore} = this.props
         return(
@@ -42,6 +45,7 @@ export default class Chart extends React.Component {
                                            <div className="weekday" key={key}>
                                                <Week
                                                     {...item}
+                                                    onShow = {this.showModel}
                                                 />
                                            </div>
                                        )
@@ -52,6 +56,7 @@ export default class Chart extends React.Component {
                                             <div className="weekday" key={key}>
                                                 <Week
                                                      {...item}
+                                                     onShow = {this.showModel}
                                                  />
                                             </div>
                                         )
