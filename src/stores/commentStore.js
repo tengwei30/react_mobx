@@ -1,5 +1,5 @@
 import { observable, action, computed, runInAction} from 'mobx';
-import * as mobx from 'mobx'
+import * as mobx from 'mobx';
 import times from '../common/timeConfig.js';
 import getWeekDays from '../common/weekTimes';
 import moment from 'moment';
@@ -12,6 +12,7 @@ class CommentStore {
     @observable responseData = []
     @observable times = times
     @observable switchWeek = true;
+    @observable visibleModal = false;
 
     @action
     async fetchData(RoomId) {

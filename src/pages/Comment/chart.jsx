@@ -1,12 +1,14 @@
 import React from 'react';
 import times from '../../common/timeConfig.js';
+import {message} from 'antd';
 import './comment.css';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import moment from 'moment';
 import Week from "./week.jsx";
+import Dmodal from './Modal.jsx';
 
-@inject('commentStore', 'layoutStore')
+@inject('commentStore', 'layoutStore','modalStore')
 @observer
 export default class Chart extends React.Component {
     constructor(props) {
@@ -18,8 +20,14 @@ export default class Chart extends React.Component {
             this.props.commentStore.fetchData(RoomId)
         })
     }
-    showModel = () => {
-        console.log(1)
+    showModel = (times, val) => {
+        const nowTime = new Date(moment().format('YYYY-MM-DD HH:mm:ss')).getTime() - 1800000
+        if(val.time < nowTime) {
+            message.warning("不可预定过去时间～")
+            return false
+        }
+        this.props.modalStore.setVisibleModal(true)
+        this.props.modalStore.setTimes(times)
     }
     render() {
         const {commentStore} = this.props
@@ -66,6 +74,7 @@ export default class Chart extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Dmodal />
             </div>
         )
     }

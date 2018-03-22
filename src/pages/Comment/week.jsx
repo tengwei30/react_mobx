@@ -2,15 +2,16 @@ import React from 'react';
 import moment from "moment";
 
 
-const Week = ({day, week, times, onShow}) => {
+// const Week = ({day, week, times, onShow}) => {
+const Week = (item) => {
     return ( 
         <div>
             <div className="weekdayHeader">
-                <span style={(moment().format('YYYY-MM-DD') === day) ? {color: 'rgb(112,157,228)'} : {}}>{day}</span>
-                <span style={(moment().format('YYYY-MM-DD') === day) ? {color: 'rgb(112,157,228)'} : {}}>{week}</span>
+                <span style={(moment().format('YYYY-MM-DD') === item.day) ? {color: 'rgb(112,157,228)'} : {}}>{item.day}</span>
+                <span style={(moment().format('YYYY-MM-DD') === item.day) ? {color: 'rgb(112,157,228)'} : {}}>{item.week}</span>
             </div>
             {
-                times.map((val, key) => {
+                item.times.map((val, key) => {
                     if (val.used) {
                         return (
                             <div className="timeSingleBlock" key={val.time}>
@@ -33,7 +34,7 @@ const Week = ({day, week, times, onShow}) => {
                         return (
                             <div key={val.time} className="timeSingleBlock">
                                 <div className="create"
-                                onClick={onShow}
+                                onClick={() => onShow(times, val)}
                                 >
                                     <div className="makeMeet">
                                         预定
