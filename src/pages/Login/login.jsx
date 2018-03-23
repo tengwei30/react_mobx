@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Icon, Input, Button,message,notification } from 'antd';
 import { Redirect } from 'react-router-dom';
 const FormItem = Form.Item;
-// import LoginMain from '../../../assets/images/logoMain.png';
+import LoginMain from '../../../assets/images/logoMain.png';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
             <div>
                 <Form style={Style.formBg} onSubmit = { this.handleSubmit } className="login-form">
                     <h2 style={Style.Headtitle}>
-                        {/* <img src={LoginMain} /> */}
+                        <img src={LoginMain} />
                         <p style={{color:'#ccc',letterSpacing:10,paddingBottom:15}}>会议室预定</p>
                     </h2>
                     <FormItem>
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
 const Style = {
     formBg:{
         backgroundColor:'#fff',
-        width: '70%',
+        width: 300,
         margin: '0 auto',
         paddingTop: 200
     },
