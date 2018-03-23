@@ -1,11 +1,19 @@
 import React from 'react';
+const height = document.body.clientHeight
 
-export default class Home extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>Welcome to</h1>
-            </div>
-        )
+const Home = () => {
+    return (
+        <div style={styles.content}>
+            <h5>点击左侧房间，预定会议室</h5>
+        </div>
+    )
+}
+export default Home
+const styles = {
+    content: {
+        display: 'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        height: height-100
     }
 }

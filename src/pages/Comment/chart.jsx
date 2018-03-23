@@ -16,18 +16,26 @@ export default class Chart extends React.Component {
     }
     componentWillMount () {
         autorun(() => {
-            const RoomId = this.props.layoutStore.RoomId
+            const { RoomId } = this.props.layoutStore
             this.props.commentStore.fetchData(RoomId)
+            this._roomStates()
         })
     }
-    showModel = (times, val) => {
+    _roomStates () {
+        let _this = this
+        socket.on('roomStates',function(data) {
+            _this.props.commentStore.setresponseData(data)
+        })
+    }
+    showModel = (item, val) => {
         const nowTime = new Date(moment().format('YYYY-MM-DD HH:mm:ss')).getTime() - 1800000
         if(val.time < nowTime) {
             message.warning("不可预定过去时间～")
             return false
         }
         this.props.modalStore.setVisibleModal(true)
-        this.props.modalStore.setTimes(times)
+        this.props.modalStore.setmodalData(item)
+        this.props.modalStore.setisModalData(val)
     }
     render() {
         const {commentStore} = this.props
@@ -74,7 +82,9 @@ export default class Chart extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Dmodal />
+                <Dmodal
+                    roomId={this.props.layoutStore.RoomId}
+                />
             </div>
         )
     }

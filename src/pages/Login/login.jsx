@@ -1,21 +1,26 @@
 import React from 'react';
 import { Form, Icon, Input, Button,message,notification } from 'antd';
+import { Redirect } from 'react-router-dom';
 const FormItem = Form.Item;
 // import LoginMain from '../../../assets/images/logoMain.png';
 
 class LoginForm extends React.Component {
     constructor(props) {
         super(props)
-
+        this.state = {
+            landed: false
+        }
     }
-    // handleSubmit=()=>{
-    //     this.props.history.push({
-    //         pathname: '/'
-    //     })
-    // }
+    handleSubmit=()=>{
+        this.setState({
+            landed: true
+        })
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
-        return(
+        return this.state.landed ? 
+            <Redirect to={{ pathname: '/index/home'}} />
+        : (
             <div>
                 <Form style={Style.formBg} onSubmit = { this.handleSubmit } className="login-form">
                     <h2 style={Style.Headtitle}>

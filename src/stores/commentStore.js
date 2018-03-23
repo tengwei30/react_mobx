@@ -61,6 +61,20 @@ class CommentStore {
     setswitchWeek (boolean) { // 本周/下周
         this.switchWeek = boolean
     }
+
+    @action
+    setresponseData (res) {
+        console.info(res)
+        for (let i in res.data) {
+            res.data[i].beginTime = new Date(moment(res.data[i].beginTime)).getTime()
+            res.data[i].endTime = new Date(moment(res.data[i].endTime)).getTime()
+        }
+        const url = window.location.href;
+        const num = window.location.href.lastIndexOf('/') + 1
+        if(res.roomId && res.roomId == url.slice(num)) {
+           this.responseData = res.data
+        }
+    }
 }
 
 export default CommentStore;

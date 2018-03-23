@@ -26,7 +26,7 @@ class LayoutaPage extends React.Component {
     Click = ({key}) => {
         const { layoutStore, history } = this.props
         layoutStore.setRoomId(key)
-        history.push({pathname: `/meet/${key}`})
+        history.push({pathname: `/index/meet/${key}`})
     }
     render() {
         const { listdatas, roomInfo } = this.props.layoutStore
@@ -39,7 +39,7 @@ class LayoutaPage extends React.Component {
                             <img src={imgs.avatar} />
                             <div className="avatar">
                                 <p className="name">admin</p>
-                                <p className="email">zhangsong@guanghe.tv</p>
+                                <p className="email">admin@guanghe.tv</p>
                             </div>
                         </header>
                     </div>

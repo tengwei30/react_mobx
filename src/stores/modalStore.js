@@ -1,17 +1,13 @@
 import { observable,action,computed } from 'mobx';
 import * as mobx from 'mobx';
 import _ from 'lodash';
+import axios from 'axios';
+import APIs from '../common/api';
 
 class ModalStore {
-    @observable times = []
     @observable modalData ={}
     @observable isModalData = {}
     @observable visibleModal = false
-
-    @action
-    setTimes(data) {
-        this.times = data
-    }
 
     @action
     setmodalData(data) {
@@ -26,6 +22,23 @@ class ModalStore {
     @action
     setVisibleModal (boolean) {
         this.visibleModal = boolean
+    }
+
+    // 创建
+    async putData (data) {
+        let res = await axios({
+            method: 'PUT',
+            url: `${APIs.PUT_ROOM_STATUS}`,
+            data: data,
+            header: {
+                'Content-Type': 'application/json;charset=utf8'
+            }
+        })
+    }
+
+    // 删除
+    async delData (roomId, stateId) {
+        let res = await axios.delete(`${APIs.DELETE_ROOM_STATUS}${roomId}/state/${stateId}`)
     }
 }
 

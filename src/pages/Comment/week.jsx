@@ -15,7 +15,7 @@ const Week = (item) => {
                     if (val.used) {
                         return (
                             <div className="timeSingleBlock" key={val.time}>
-                                <div className="create">
+                                <div className="create" onClick={() => item.onShow(item, val)}>
                                     {
                                         (val.time == val.beginTime) ? (
                                             <div className="active" style={{borderTop:'2px solid #fff'}}>
@@ -34,7 +34,7 @@ const Week = (item) => {
                         return (
                             <div key={val.time} className="timeSingleBlock">
                                 <div className="create"
-                                onClick={() => onShow(times, val)}
+                                onClick={() => item.onShow(item, val)}
                                 >
                                     <div className="makeMeet">
                                         预定
